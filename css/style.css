@@ -195,8 +195,8 @@
   }
   
   .filter-btn {
-  background-color: #f1ddf1;
-  border: 3px solid #f0e7f0;
+  background-color: #f1eedd;
+  border: 3px solid #cec2ae;
   color: white;
   font-weight: bold;
   padding: 10px 20px;
@@ -207,9 +207,9 @@
   }
   
   .filter-btn:hover, .filter-btn.active {
-  background-color: #ffb9f4;
+  background-color: #f1eedd;
   color: #fefdfd;
-  border: 3px solid #dedef2;
+  border: 3px solid #cec2ae;
   transform: scale(1.05);
   }
    /* Estilos para el contenedor de la galería de XXXX */
@@ -222,7 +222,7 @@
   
   /* Estilos para cada tarjeta  (generada por JS) */
   .gato-card {
-  border: 2px solid #f0daef;
+  border: 2px solid #e5cea9;
   border-radius: 10px;
   padding: 15px;
   width: 250px;

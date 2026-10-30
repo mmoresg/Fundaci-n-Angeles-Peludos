@@ -26,10 +26,55 @@ const filterButtons = document.querySelectorAll(".filter-btn");
 
 // Función para renderizar las tarjetas 
 function renderDw(genero) {
-    let dwmireilleToRender = [];
-    if (genero === "all") {
-        dwmireilleToRender = dwmireille;
-    } else {
-        dwmireilleToRender = dwmireille.filter(Dwmireille => Dwmireille.genero === genero);
+    const generoSeleccionado = genero === "all"
+        ? null
+        : genero.toLowerCase().replace(/s$/, "");
+    const dwmireilleToRender = generoSeleccionado
+        ? dwmireille.filter(dw => dw.genero.toLowerCase() === generoSeleccionado)
+        : dwmireille;
+
+    if (dwmireilleToRender.length === 0) {
+        dwmireilleContainer.innerHTML = '<p class="text-center w-100">No hay disponibles para esta categoría.</p>';
+        return;
     }
+
+    dwmireilleContainer.innerHTML = dwmireilleToRender.map(dw => `
+        <figure class="gato-card" data-gender="${dw.genero === "Hembra" ? "Hembras" : "Machos"}">
+            <img src="${dw.image}" alt="Gato en adopción, edad: ${dw.name}">
+            <figcaption>${dw.name}</figcaption>
+            <div class="card-description">
+                <p>${dw.description}</p>
+            </div>
+        </figure>
+    `).join("");
+}
+
+// Agrega event listeners a los botones de filtro
+filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const genero = button.dataset.category;
+
+
+        // Remueve la clase 'active' de todos los botones
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        // Agrega la clase 'active' al botón clickeado
+        button.classList.add("active");
+
+        // Renderiza las tarjetas con el filtro seleccionado
+        renderDw(genero);
+    });
+});
+
+// Renderizar todos para cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    renderDw('all');
+});
+
+
+// Función para el botón de volver al inicio
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
